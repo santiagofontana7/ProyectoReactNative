@@ -1,0 +1,82 @@
+[
+    {
+        "name": "smartphones",
+        "img": "https://i.ibb.co/9wp5SSM/smartphones.webp"
+    },
+    {
+        "name": "laptops",
+        "img": "https://i.ibb.co/fFzTTB5/laptops.jpg"
+    },
+    {
+        "name": "fragrances",
+        "img": "https://i.ibb.co/wQ9Mw6Y/fragances.png"
+    },
+    {
+        "name": "skincare",
+        "img": "https://i.ibb.co/phSbQMm/skincare.jpg"
+    },
+    {
+        "name": "groceries",
+        "img": "https://i.ibb.co/9v4z0vz/groceries.png"
+    },
+    {
+        "name": "home-decoration",
+        "img": "https://i.ibb.co/4jY5LLw/home-decoration.jpg"
+    },
+    {
+        "name": "furniture",
+        "img": "https://i.ibb.co/JckkLqV/furnitures.jpg"
+    },
+    {
+        "name": "tops",
+        "img": "https://i.ibb.co/RB3Bzp4/tops.webp"
+    },
+    {
+        "name": "womens-dresses",
+        "img": "https://i.ibb.co/dgLVNdR/womens-dresses.webp"
+    },
+    {
+        "name": "womens-shoes",
+        "img": "https://i.ibb.co/Tt08sFz/womens-shoes.jpg"
+    },
+    {
+        "name": "mens-shirts",
+        "img": "https://i.ibb.co/LQk3rMh/mens-shirts.jpg"
+    },
+    {
+        "name": "mens-shoes",
+        "img": "https://i.ibb.co/hFnL8vF/mens-shoes.jpg"
+    },
+    {
+        "name": "mens-watches",
+        "img": "https://i.ibb.co/WfyHVrs/mens-watches.jpg"
+    },
+    {
+        "name": "womens-watches",
+        "img": "https://i.ibb.co/dtScQ42/womens-watches.jpg"
+    },
+    {
+        "name": "womens-bags",
+        "img": "https://i.ibb.co/hs2JkZ8/womens-bags.jpg"
+    },
+    {
+        "name": "womens-jewellery",
+        "img": "https://i.ibb.co/vPytsWk/womens-jewellery.jpg"
+    },
+    {
+        "name": "sunglasses",
+        "img": "https://i.ibb.co/9sRXcQ8/sunglasses.jpg"
+    },
+    {
+        "name": "automotive",
+        "img": "https://i.ibb.co/TMkT7D0/automotive.jpg"
+    },
+    {
+        "name": "motorcycle",
+        "img": "https://i.ibb.co/FhYRHcp/motorcycle.jpg"
+    },
+    {
+        "name": "lighting",
+        "img": "https://i.ibb.co/F6bsRKN/lighting.webp"
+    }
+]
