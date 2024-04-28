@@ -1,8 +1,9 @@
 import { FlatList, StyleSheet, Text, View } from "react-native"
-import products from "../data/products.json"
 import ProductItem from "../components/ProductItem"
 import Search from "../components/Search"
 import { useState, useEffect } from "react"
+import { useGetProductsByCategoryQuery } from "../services/shopService"
+import Loader from "../components/Loaders"
 
 const ItemListCategory = ({
   setCategorySelected = () => { },
@@ -14,26 +15,32 @@ const ItemListCategory = ({
   const [productsFiltered, setProductsFiltered] = useState([])
   const { categoryName: categorySelected } = route.params
 
+  const { data: products, error, isLoading } = useGetProductsByCategoryQuery(categorySelected);
+
   useEffect(() => {
-    const productsPrefiltered = products.filter(
-      (product) => product.category === categorySelected
-    )
+    if (!isLoading) {
+      const productsFilter = products.filter((product) =>
+        product.title.toLocaleLowerCase().includes(keyWord.toLocaleLowerCase())
+      )
+      setProductsFiltered(productsFilter)
+    }
 
-    const productsFilter = productsPrefiltered.filter((product) =>
-      product.title.toLocaleLowerCase().includes(keyWord.toLocaleLowerCase())
-    )
-    setProductsFiltered(productsFilter)
-
-  }, [keyWord, categorySelected])
+  }, [keyWord, categorySelected, products, isLoading])
 
   return (
-    <View style={styles.flatListContainer}>
-      <Search onSearch={setKeyword} goBack={() => navigation.goBack()} />
-      <FlatList showsVerticalScrollIndicator={false} data={productsFiltered} renderItem={({ item, index }) => (
-        <ProductItem product={item} index={index} navigation={navigation} />
-      )}
-        keyExtractor={(producto) => producto.id}
-      />
+    <View style={isLoading ? [styles.container, styles.horizontal] : styles.flatListContainer}>
+      {
+        isLoading ?
+          <Loader text={"Cargando productos"} /> :
+          <View>
+            <Search onSearch={setKeyword} goBack={() => navigation.goBack()} />
+            <FlatList showsVerticalScrollIndicator={false} data={productsFiltered} renderItem={({ item, index }) => (
+              <ProductItem product={item} index={index} navigation={navigation} />
+            )}
+              keyExtractor={(producto) => producto.id}
+            />
+          </View>
+      }
     </View>
   )
 }
@@ -41,6 +48,14 @@ const ItemListCategory = ({
 export default ItemListCategory
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  horizontal: {
+    justifyContent: 'space-around',
+  },
   flatListContainer: {
     width: "100%",
     flex: 1,

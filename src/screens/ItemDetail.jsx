@@ -1,26 +1,21 @@
 import { Button, Pressable, StyleSheet, Text, View } from "react-native"
 import React, { useEffect, useState } from "react"
-import allProducts from "../data/products.json"
 import Slider from "../components/Carousel/Slider"
 import { colors } from "../utilities/colors"
 import { Ionicons } from '@expo/vector-icons';
+import { useGetProductByIdQuery } from "../services/shopService"
+import Loader from "../components/Loaders"
 
 const ItemDetail = ({ route, navigation }) => {
 
-  const [product, setProduct] = useState(null)
   const { productId: idSelected } = route.params
 
-  useEffect(() => {
-    const productSelected = allProducts.find(
-      (product) => product.id === idSelected
-    )
-    setProduct(productSelected)
-  }, [idSelected])
+  const { data: product, error, isLoading } = useGetProductByIdQuery(idSelected);
 
   return (
-    <View>
-      {product ? (
-        <View style={styles.mainContainer}>
+    <View style={isLoading ? [styles.container, styles.horizontal] : styles.mainContainer}>
+      {!isLoading ? (
+        <View>
           <Slider Images={product.images} />
           <View style={styles.textContainer}>
             <View style={{ flexDirection: "row" }}>
@@ -38,7 +33,7 @@ const ItemDetail = ({ route, navigation }) => {
           <View>
           </View>
         </View>
-      ) : null}
+      ) : <Loader text={"Cargando producto"} />}
     </View>
   )
 }
@@ -46,6 +41,14 @@ const ItemDetail = ({ route, navigation }) => {
 export default ItemDetail
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  horizontal: {
+    justifyContent: 'space-around',
+  },
   mainContainer: {
     justifyContent: "center",
   },
