@@ -14,7 +14,7 @@ const ProductItem = ({ product, index, setProductSelected = () => { }, navigatio
     }
 
     return (
-        <Card style={index % 2 == 0 ? styles.cardOdd : styles.card}>
+        <Card style={index % 2 == 0 ? styles.cardEven : styles.cardOdd}>
             <Pressable style={styles.pressable} onPress={handleNavigate}>
                 <Image resizeMode="cover" style={styles.image} source={{ uri: product.thumbnail }} />
                 <View>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         margin: 10,
         backgroundColor: colors.softBlue,
     },
-    card: {
+    cardEven: {
         height: 120,
         width: "100%",
         margin: 10,

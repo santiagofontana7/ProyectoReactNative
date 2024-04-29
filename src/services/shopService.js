@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { baseURL } from '../databases/rtDb'
 
 export const shopApi = createApi({
+    reducerPath: "shopApi",
     baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
     endpoints: (builder) => ({
         
@@ -26,8 +27,15 @@ export const shopApi = createApi({
 
                 return responseReturn;
             }
+        }),
+        postOrder: builder.mutation({
+            query: ({...order}) => ({
+                url: 'orders.json',
+                method: 'POST',
+                body: order
+            })
         })
     })
 })
 
-export const { useGetCategoriesQuery, useGetProductByIdQuery, useGetProductsByCategoryQuery } = shopApi
+export const { useGetCategoriesQuery, useGetProductByIdQuery, useGetProductsByCategoryQuery, usePostOrderMutation } = shopApi
