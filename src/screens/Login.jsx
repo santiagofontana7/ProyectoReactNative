@@ -12,8 +12,8 @@ import Loader from "../components/Loaders"
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     let [triggerSignIn, result] = useSignInMutation();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("santiagofontana7@gmail.com");
+    const [password, setPassword] = useState("test12");
 
     const [emailError, setEmailEror] = useState(false);
     const [passwordError, setPasswordEror] = useState(false);
