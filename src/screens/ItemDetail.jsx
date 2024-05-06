@@ -32,14 +32,14 @@ const ItemDetail = ({ route, navigation }) => {
     <View style={isLoading ? [styles.container, styles.horizontal] : styles.mainContainer}>
       {!isLoading ? (
         <View>
+          <View style={styles.containerBack}>
+            <Pressable onPress={() => navigation.goBack()}>
+              <Ionicons name="chevron-back-circle" size={24} color={colors.black} />
+            </Pressable>
+          </View>
           <Slider Images={product.images} />
           <View style={styles.textContainer}>
-            <View style={{ flexDirection: "row" }}>
-              <Pressable onPress={() => navigation.goBack()}>
-                <Ionicons name="chevron-back-circle" size={24} color={colors.black} />
-              </Pressable>
-              <Text style={styles.textBrand}>Volver</Text>
-            </View>
+
             <Text style={styles.textTitle}>{product.title}</Text>
             <Text style={styles.textBrand}>{product.brand}</Text>
             <Text>{product.description}</Text>
@@ -63,6 +63,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  containerBack: {
+    zIndex: 99,
+    marginTop: 10,
+    top: 105,
+    left: 10
   },
   horizontal: {
     justifyContent: 'space-around',

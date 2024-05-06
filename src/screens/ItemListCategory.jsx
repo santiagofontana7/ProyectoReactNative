@@ -33,7 +33,7 @@ const ItemListCategory = ({
         isLoading ?
           <Loader text={"Cargando productos"} /> :
           <View>
-            <Search onSearch={setKeyword} goBack={() => navigation.goBack()} />
+            <Search onSearch={setKeyword} goBack={() => navigation.goBack()} category={categorySelected} />
             <FlatList showsVerticalScrollIndicator={false} data={productsFiltered} renderItem={({ item, index }) => (
               <ProductItem product={item} index={index} navigation={navigation} />
             )}
@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    paddingBottom: 15,
-    paddingTop: 5
+    paddingBottom: 15
   },
 })

@@ -81,6 +81,7 @@ const Cart = () => {
             {
                 CartData.length > 0 ?
                     <View>
+                        <Text style={styles.text}>{"Mi carrito"}</Text>
                         <FlatList
                             data={CartData}
                             keyExtractor={(pepe) => pepe.id}
@@ -114,7 +115,10 @@ const styles = StyleSheet.create({
         width: "50%"
     },
     container: {
-        padding: 10,
+        paddingTop: 5,
+        paddingBottom: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
         justifyContent: "space-between",
         justifyContent: "center",
     },
@@ -176,4 +180,8 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         textAlign: 'center',
     },
+    text: {
+        textAlign: "center",
+        fontSize: 18,
+    }
 })

@@ -45,7 +45,7 @@ const BottomTabNavigator = () => {
                     return (
                         <View>
                             <AntDesign name="shoppingcart" size={36} color={focused ? colors.black : colors.gray} />
-                            <Badge containerStyle={{ position: 'absolute', top: -4, right: -4 }} value={CartData.length} status={CartData.length == 0 ? "warning" : "error"} />
+                            <Badge containerStyle={{ position: 'absolute', top: -4, right: -4 }} value={CartData.length} status={CartData.length == 0 ? "error" : "primary"} />
                         </View>
                     )
                 },

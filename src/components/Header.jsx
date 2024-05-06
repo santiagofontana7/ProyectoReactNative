@@ -1,7 +1,6 @@
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
+import { StyleSheet, Text, View, useWindowDimensions, Image } from 'react-native'
 import React from 'react'
 import { colors } from '../utilities/colors'
-import { useSelector } from 'react-redux'
 
 const Header = ({ route }) => {
 
@@ -9,7 +8,12 @@ const Header = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={width > 360 ? styles.text : styles.textSmall}>{route.name}</Text>
+      <View style={styles.imageContainer}>
+                <Image
+                    source={require("../images/logo.png")}
+                    style={styles.image}
+                />
+            </View>
     </View>
   )
 }
@@ -24,10 +28,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  textSmall: {
-    fontSize: 16
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'contain'
   },
-  text: {
-    fontSize: 22
-  }
+  imageContainer: {
+    width: "100%",
+    height: "65%"
+  },
 })

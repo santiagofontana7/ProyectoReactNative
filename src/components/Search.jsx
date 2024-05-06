@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from "../utilities/colors";
 
-const Search = ({ onSearch = () => { }, goBack = () => { } }) => {
+const Search = ({ onSearch = () => { }, goBack = () => { }, category }) => {
   const [keyword, setKeyword] = useState("")
 
   const search = (value) => {
@@ -12,14 +12,20 @@ const Search = ({ onSearch = () => { }, goBack = () => { } }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <Pressable onPress={goBack}>
-        <Ionicons name="chevron-back-circle" size={24} color={colors.black} />
-      </Pressable>
+    <>
+      <View style={styles.container}>
+        <Pressable onPress={goBack}>
+          <Ionicons name="chevron-back-circle" size={24} color={colors.black} />
+        </Pressable>
+        <Text style={styles.text}>
+          <Text >{"Estás viendo "}</Text>
+          <Text style={{ fontWeight: "bold", fontStyle: "italic", textDecorationLine: "underline" }}>{category}</Text>
+        </Text>
+      </View>
       <View style={styles.inputContainer}>
         <TextInput style={styles.input} placeholder="Buscar..." value={keyword} onChangeText={value => search(value)} />
       </View>
-    </View>
+    </>
   )
 }
 
@@ -28,9 +34,10 @@ export default Search
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
     gap: 5,
+    paddingTop: 5,
+    left:5
   },
   inputContainer: {
     flexDirection: "column",
@@ -44,4 +51,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderRadius: 10,
   },
+  text: {
+    textAlign: "center",
+    fontSize: 18,
+    width: "85%"
+  }
 })
