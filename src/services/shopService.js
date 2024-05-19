@@ -4,7 +4,7 @@ import { baseURL } from '../databases/rtDb'
 export const shopApi = createApi({
     reducerPath: "shopApi",
     baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
-    tagTypes: ['profileImageGet'],
+    tagTypes: ['profileImageGet', 'getOrders'],
     endpoints: (builder) => ({
 
         getCategories: builder.query({
@@ -34,7 +34,12 @@ export const shopApi = createApi({
                 url: 'orders.json',
                 method: 'POST',
                 body: order
-            })
+            }),
+            invalidatesTags: ['getOrders']
+        }),
+        getOrders: builder.query({
+            query: (user) => `orders.json?orderBy="user"&equalTo="${user}"`,
+            providesTags: ['getOrders']
         }),
         getProfileImage: builder.query({
             query: (localId) => `profileImages/${localId}.json`,
@@ -54,4 +59,4 @@ export const shopApi = createApi({
     })
 })
 
-export const { useGetCategoriesQuery, useGetProductByIdQuery, useGetProductsByCategoryQuery, usePostOrderMutation, useGetProfileImageQuery, usePostProfileImageMutation, } = shopApi
+export const { useGetCategoriesQuery, useGetProductByIdQuery, useGetProductsByCategoryQuery, usePostOrderMutation, useGetOrdersQuery, useGetProfileImageQuery, usePostProfileImageMutation, } = shopApi

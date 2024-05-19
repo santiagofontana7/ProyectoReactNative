@@ -24,17 +24,14 @@ const CartItem = ({ cartItem, index }) => {
     return (
         <View style={[index % 2 == 0 ? styles.cardEven : styles.cardOdd, styles.card]} onPress={() => { }}>
             <View style={styles.textContainer}>
-                
                 <Text style={styles.textTitle}>{cartItem.title}</Text>
                 <Text style={[styles.textSubtitle, styles.textItalic]}>Precio unitario ${cartItem.price}</Text>
                 <Text style={styles.textSubtitle}>Cantidad: {cartItem.quantity}</Text>
                 <Text style={[styles.textSubtitle, styles.textItalic]}>Sub total ${cartItem.price * cartItem.quantity}</Text>
-                
             </View>
             <Pressable onPress={handleRemoveItem}>
-                <Entypo name="trash" size={30} color={colors.black} />
+                <Entypo name="trash" size={30} color={colors.black} style={{ padding: 10 }} />
             </Pressable>
-
         </View>
     );
 };

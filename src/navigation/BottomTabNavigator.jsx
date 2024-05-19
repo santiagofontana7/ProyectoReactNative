@@ -10,6 +10,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { colors } from "../utilities/colors"
 import { Avatar, Badge, Icon, withBadge } from 'react-native-elements'
 import MyProfileStackNavigator from "./MyProfileStackNavigator"
+import OrderStack from "./OrderStackNavigator"
 import { Ionicons } from '@expo/vector-icons';
 import { useGetProfileImageQuery } from "../services/shopService"
 
@@ -17,7 +18,7 @@ const Tab = createBottomTabNavigator()
 
 const BottomTabNavigator = () => {
 
-    const { imageCamera, localId } = useSelector(state => state.auth.value)
+    const { localId } = useSelector(state => state.auth.value)
     const { data: imageFromBase } = useGetProfileImageQuery(localId)
 
     const { items: CartData, total } = useSelector(state => state.cart.value)
@@ -46,6 +47,16 @@ const BottomTabNavigator = () => {
                         <View>
                             <AntDesign name="shoppingcart" size={36} color={focused ? colors.black : colors.gray} />
                             <Badge containerStyle={{ position: 'absolute', top: -4, right: -4 }} value={CartData.length} status={CartData.length == 0 ? "error" : "primary"} />
+                        </View>
+                    )
+                },
+            }}
+            />
+            <Tab.Screen name="Orders" component={OrderStack} options={{
+                tabBarIcon: ({ focused }) => {
+                    return (
+                        <View>
+                            <Ionicons name="receipt-outline" size={36} color={focused ? colors.black : colors.gray} />
                         </View>
                     )
                 },

@@ -9,9 +9,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDispatch } from "react-redux"
 import { emptyCart } from "../features/Cart/cartSlice"
 
-const Cart = () => {
+const Cart = ({ navigation }) => {
 
     const dispatch = useDispatch()
+    const { localId } = useSelector(state => state.auth.value)
     const [modalVisible, setModalVisible] = useState(false);
     const { items: CartData, total } = useSelector(state => state.cart.value)
     const [triggerPostOrder, result] = usePostOrderMutation()
@@ -25,7 +26,7 @@ const Cart = () => {
     }, [emptyCartAction])
 
     const onConfirmOrder = () => {
-        triggerPostOrder({ items: CartData, user: 'Santiago', total })
+        triggerPostOrder({ items: CartData, user: localId, total, date: new Date() })
     }
 
     if (!result.isUninitialized && modalVisible && !result.isLoading) {
@@ -35,7 +36,9 @@ const Cart = () => {
             Alert.alert('Compra confirmada', 'Identificador de compra: ' + result.data.name, [
                 {
                     text: 'Aceptar',
-                    onPress: () => { result.reset(); },
+                    onPress: () => { 
+                        navigation.navigate("Orders")
+                        result.reset(); },
                 },
             ]);
         }
