@@ -1,13 +1,19 @@
-import {
-  Platform,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-} from "react-native"
+import { Platform, SafeAreaView, StatusBar, StyleSheet, } from "react-native"
 import Navigator from "./src/navigation/Navigator"
 import { Provider } from "react-redux"
 import store from "./src/store"
 import { ToastProvider } from 'react-native-toast-notifications'
+import { initDB } from "./src/databases/sqlLite"
+
+(async () => {
+  try {
+    if (Platform.OS !== "web") {
+      const response = await initDB()
+    }
+  } catch (error) {
+    console.log(error);
+  }
+})()
 
 export default function App() {
   return (

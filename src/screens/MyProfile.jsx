@@ -1,9 +1,10 @@
-import { Image, StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View, Text, Platform } from "react-native";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useGetProfileImageQuery } from "../services/shopService";
 import { colors } from "../utilities/colors";
 import { clearUser } from "../features/User/userSlice";
+import { deleteSession } from "../databases/sqlLite";
 
 const MyProfile = ({ navigation }) => {
 
@@ -15,8 +16,15 @@ const MyProfile = ({ navigation }) => {
         navigation.navigate('Image selector')
     };
 
-    const logOut = () => {
-        dispatch(clearUser());
+    const logOut = async () => {
+        try {
+            if (Platform.OS !== "web") {
+                await deleteSession()
+            }
+            dispatch(clearUser())
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const defaultImageRoute = "../images/defaultProfile.png"

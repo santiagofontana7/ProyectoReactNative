@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity, Alert } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity, Alert, Platform } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import InputForm from "../components/InputForm";
@@ -8,6 +8,7 @@ import { signupSchema } from "../validations/auth";
 import { colors } from "../utilities/colors";
 import { useToast } from "react-native-toast-notifications";
 import Loader from "../components/Loaders";
+import { insertSession } from "../databases/sqlLite";
 
 const SignupScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
@@ -26,19 +27,34 @@ const SignupScreen = ({ navigation }) => {
 
     useEffect(() => {
         if (result.isSuccess) {
-            Alert.alert('Cuenta creada con éxito!', 'Serás redirigido al sitio', [
-                {
-                    text: 'Aceptar',
-                    onPress: () => {
-                        dispatch(
-                            setUser({
-                                email: result.data.email,
-                                idToken: result.data.idToken
-                            })
-                        )
-                    },
-                },
-            ]);
+            (async () => {
+                try {
+                    if (Platform.OS !== "web") {
+                        const response = await insertSession({
+                            email: result.data.email,
+                            localId: result.data.localId,
+                            token: result.data.idToken,
+                        })
+                    }
+                    Alert.alert('Cuenta creada con éxito!', 'Serás redirigido al sitio', [
+                        {
+                            text: 'Aceptar',
+                            onPress: () => {
+                                dispatch(
+                                    setUser({
+                                        email: result.data.email,
+                            idToken: result.data.idToken,
+                            localId: result.data.localId,
+                                    })
+                                )
+                            },
+                        },
+                    ]);
+                } catch (error) {
+                    console.log(error);
+                }
+            })()
+            
         }
         else if (result.error) {
             Alert.alert('Error!', 'Ha ocurrido un error al intentar crear tu cuenta, intentalo nuevamente más tarde', [

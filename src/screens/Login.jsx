@@ -1,19 +1,20 @@
-import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity, Alert } from "react-native"
+import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity, Alert, Platform } from "react-native"
 import React, { useState, useEffect } from "react"
 import InputForm from "../components/InputForm"
 import { useSignInMutation } from "../services/authService"
 import { setUser } from "../features/User/userSlice"
 import { useDispatch } from "react-redux"
-import { signinSchema, signupSchema } from "../validations/auth";
+import { signinSchema } from "../validations/auth";
 import { colors } from "../utilities/colors";
 import { useToast } from "react-native-toast-notifications";
 import Loader from "../components/Loaders"
+import { insertSession } from "../databases/sqlLite"
 
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     let [triggerSignIn, result] = useSignInMutation();
-    const [email, setEmail] = useState("santiagofontana7@gmail.com");
-    const [password, setPassword] = useState("test12");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const [emailError, setEmailEror] = useState(false);
     const [passwordError, setPasswordEror] = useState(false);
@@ -22,13 +23,26 @@ const LoginScreen = ({ navigation }) => {
 
     useEffect(() => {
         if (result.isSuccess) {
-            dispatch(
-                setUser({
-                    email: result.data.email,
-                    idToken: result.data.idToken,
-                    localId: result.data.localId
-                })
-            )
+            (async () => {
+                try {
+                    if (Platform.OS !== "web") {
+                        const response = await insertSession({
+                            email: result.data.email,
+                            localId: result.data.localId,
+                            token: result.data.idToken,
+                        })
+                    }
+                    dispatch(
+                        setUser({
+                            email: result.data.email,
+                            idToken: result.data.idToken,
+                            localId: result.data.localId,
+                        })
+                    )
+                } catch (error) {
+                    console.log(error);
+                }
+            })()
         }
         else if (result.error) {
             Alert.alert('Credeciales inválidas', 'Usuario y/o contraseña incorrectos', [
