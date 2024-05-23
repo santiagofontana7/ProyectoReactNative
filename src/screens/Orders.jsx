@@ -16,7 +16,8 @@ const OrderScreen = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            const responseTransformed = Object.values(orders)
+            let responseTransformed = Object.values(orders)
+            responseTransformed.sort((a, b) => new Date(a.date) - new Date(b.date));
             setOrdersFiltered(responseTransformed)
         }
     }, [orders, isSuccess, localId])
@@ -37,7 +38,7 @@ const OrderScreen = () => {
             :
             <View style={styles.centerEmpty}>
                 <MaterialIcons name="broken-image" size={50} color={colors.gray} />
-                <Text>No tiene ordenes generadas</Text>
+                <Text>No tenés ordenes generadas</Text>
             </View>
     )
 }

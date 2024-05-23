@@ -14,6 +14,7 @@ const ProductItem = ({ product, index, setProductSelected = () => { }, navigatio
     }
 
     return (
+        //Se utiliza index del ítem para saber si es un elemento par o impar de la lista y alternar el estilo/color
         <Card style={index % 2 == 0 ? styles.cardEven : styles.cardOdd}>
             <Pressable style={styles.pressable} onPress={handleNavigate}>
                 <Image resizeMode="cover" style={styles.image} source={{ uri: product.thumbnail }} />

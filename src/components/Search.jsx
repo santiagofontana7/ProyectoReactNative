@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from "../utilities/colors";
 
+//La búsqueda y filtrado se hace en tiempo real, sin necesidad de presionar ningún botón de acción
 const Search = ({ onSearch = () => { }, goBack = () => { }, category }) => {
   const [keyword, setKeyword] = useState("")
 

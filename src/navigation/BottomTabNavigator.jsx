@@ -46,6 +46,7 @@ const BottomTabNavigator = () => {
                     return (
                         <View>
                             <AntDesign name="shoppingcart" size={36} color={focused ? colors.black : colors.gray} />
+                            {/* Ícono para mostrar la cantidad de ítems que tiene el carrito */}
                             <Badge containerStyle={{ position: 'absolute', top: -4, right: -4 }} value={CartData.length} status={CartData.length == 0 ? "error" : "primary"} />
                         </View>
                     )
@@ -66,6 +67,7 @@ const BottomTabNavigator = () => {
                 tabBarIcon: ({ focused }) => {
                     return (
                         <View>
+                            {/* En caso de que el usuario tenga imagen cargada, se muestra en vez del ícono por defecto */}
                             {imageFromBase ? (
                                 <Avatar rounded source={{ uri: imageFromBase?.image, }} size="small" />
                             ) : (

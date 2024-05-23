@@ -13,6 +13,7 @@ const CartItem = ({ cartItem, index }) => {
 
     const handleRemoveItem = () => {
         dispatch(removeCartItem(cartItem));
+        //Notificación toast
         toast.show("Producto eliminado del carrito", {
             type: "success",
             placement: "center",
@@ -22,6 +23,7 @@ const CartItem = ({ cartItem, index }) => {
         });
     }
     return (
+        //Se utiliza index del ítem para saber si es un elemento par o impar de la lista y alternar el estilo/color
         <View style={[index % 2 == 0 ? styles.cardEven : styles.cardOdd, styles.card]} onPress={() => { }}>
             <View style={styles.textContainer}>
                 <Text style={styles.textTitle}>{cartItem.title}</Text>
@@ -62,11 +64,9 @@ const styles = StyleSheet.create({
     textTitle: {
         fontSize: 19,
         fontWeight: "bold"
-        //color: colors.teal400,
     },
     textSubtitle: {
         fontSize: 14,
-        //color: colors.teal600,
     },
     textItalic: {
         fontStyle: 'italic'

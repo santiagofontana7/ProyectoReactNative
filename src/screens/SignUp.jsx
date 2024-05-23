@@ -124,7 +124,7 @@ const SignupScreen = ({ navigation }) => {
                         </TouchableOpacity>
                         <Text style={styles.sub}>¿Ya tenés una cuenta?</Text>
                         <Pressable onPress={() => navigation.navigate("Login")}>
-                            <Text style={styles.subLink}>Iniciar sesión</Text>
+                            <Text style={styles.subLink}>INICIAR SESIÓN</Text>
                         </Pressable>
                     </View>
                 }

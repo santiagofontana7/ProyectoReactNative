@@ -54,6 +54,7 @@ const Order = ({ order, index }) => {
 
                 </View>
             </Modal>
+            {/* Se utiliza index del ítem para saber si es un elemento par o impar de la lista y alternar el estilo/color */}
             <View style={[index % 2 == 0 ? styles.cardEven : styles.cardOdd, styles.card]}>
                 <View style={styles.textContainer}>
                     <Text style={styles.textTitle}>

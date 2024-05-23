@@ -1,5 +1,5 @@
-import { Button, Pressable, TouchableOpacity, StyleSheet, Text, View } from "react-native"
-import React, { useEffect, useState } from "react"
+import { Pressable, TouchableOpacity, StyleSheet, Text, View } from "react-native"
+import React from "react"
 import Slider from "../components/Carousel/Slider"
 import { colors } from "../utilities/colors"
 import { Ionicons } from '@expo/vector-icons';

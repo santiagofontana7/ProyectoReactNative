@@ -1,10 +1,8 @@
-import { StyleSheet, Text, View, useWindowDimensions, Image } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import React from 'react'
 import { colors } from '../utilities/colors'
 
 const Header = ({ route }) => {
-
-  const { width } = useWindowDimensions()
 
   return (
     <View style={styles.container}>

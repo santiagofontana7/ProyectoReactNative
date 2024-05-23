@@ -4,6 +4,9 @@ import { colors } from '../../utilities/colors';
 
 const { width } = Dimensions.get('screen');
 
+//Componente para paginación de imágenes en carrusel
+//Código extraido de: https://github.com/Basir-PD/React-Native-Carousel
+//Tutorial: https://www.youtube.com/watch?v=2TgArwz6je8&t=148s&ab_channel=BasirPayenda
 const Pagination = ({ data, scrollX, index }) => {
   return (
     <View style={styles.container}>

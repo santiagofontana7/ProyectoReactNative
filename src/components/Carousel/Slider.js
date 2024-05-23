@@ -4,6 +4,9 @@ import React, { useRef, useState } from 'react';
 import SlideItem from './SlideItem';
 import Pagination from './Pagination';
 
+//Componente para carrousel de imágenes
+//Código extraido de: https://github.com/Basir-PD/React-Native-Carousel
+//Tutorial: https://www.youtube.com/watch?v=2TgArwz6je8&t=148s&ab_channel=BasirPayenda
 const Slider = (Images) => {
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
